@@ -1,0 +1,76 @@
+REFERENCE ASSEMBLY IoTCapstoneDB.[Newtonsoft.Json];
+REFERENCE ASSEMBLY IoTCapstoneDB.[Microsoft.Analytics.Samples.Formats]; 
+
+USING Microsoft.Analytics.Samples.Formats.Json;
+
+DECLARE @InputPath string = "/iotcapstonelab1/{date:yyyy}/{date:MM}/{date:dd}_{*}.json";
+
+DECLARE @OutputOneHourFile string = "/output/one_hour_of_data.csv";
+DECLARE @OutputAvgFile string = "/output/avg_temp_and_windspeed.csv";
+
+// Extract all data and convert from JSON
+@json = 
+EXTRACT 
+    date DateTime,
+    EventProcessedUtcTime DateTime,
+    PartitionId int,
+    EventEnqueuedUtcTime DateTime,
+    metadata_deviceType string,
+    metadata_studentId string,
+    metadata_uid string,
+    telemetry_temperature double,
+    telemetry_pressure double,
+    telemetry_humidity double,
+    telemetry_windSpeed double,
+    telemetry_windDirection double,
+    IoTHub_ConnectionDeviceId string
+FROM 
+    @InputPath 
+USING new MultiLevelJsonExtractor(null,
+    true,
+    "EventProcessedUtcTime",
+    "PartitionId",
+    "EventEnqueuedUtcTime",
+    "metadata.deviceType",
+    "metadata.studentId",
+    "metadata.uid",
+    "telemetry.temperature",
+    "telemetry.pressure",
+    "telemetry.humidity",
+    "telemetry.windSpeed",
+    "telemetry.windDirection",
+    "IoTHub.ConnectionDeviceId"
+     );
+
+// Restrict data to last hour
+@lastHour =
+    SELECT
+        *
+    FROM
+        @json
+    WHERE
+        EventProcessedUtcTime > (DateTime.UtcNow - TimeSpan.FromHours(1));
+
+// Output intermediate data set for grading
+OUTPUT @lastHour
+TO @OutputOneHourFile
+USING Outputters.Csv(outputHeader:true);
+
+// Determine the average temperature and windspeed for each IoTHub_ConnectionDeviceId
+// Output should be 3 columns:
+//      IoTHub_ConnectionDeviceId
+//      avg_temp
+//      avg_windspeed
+
+@avgdata = 
+    SELECT
+        IoTHub_ConnectionDeviceId,
+        AVG(telemetry_temperature) AS avg_temp,
+        AVG(telemetry_windSpeed) AS avg_windspeed
+    FROM @lastHour
+    GROUP BY IoTHub_ConnectionDeviceId;
+
+// Output averaged values for assessment
+OUTPUT @avgdata
+TO @OutputAvgFile
+USING Outputters.Csv(outputHeader:true);
