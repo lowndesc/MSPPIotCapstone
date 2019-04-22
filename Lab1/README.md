@@ -7,3 +7,4 @@ Lab1 files include the following:
 - Data Lake Analytics U-SQL query file
 - Data Lake Analytics one hour data output file
 - Data Lake Analytics average temperature and windspeed output file
+- Exported ARM template for all Azure components
