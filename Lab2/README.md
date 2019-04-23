@@ -5,7 +5,7 @@ Lab 2 deliverables included:
 - Screenshot of Time Series Insights visualisations ('Interesting Telemetry')
 - Screenshot of Time Series Insights visualisations ('Suspect Telemetry')
 - Screenshot of Power BI visualisations ('Turbine Data') with Observation stating which turbine is underperforming
-- Extract
+- Exported ARM template for all Azure components
 
 Lab 2 work products included:
 
