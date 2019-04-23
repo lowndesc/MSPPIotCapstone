@@ -9,4 +9,4 @@ Lab2 files include the following deliverables:
 
 plus the following additional work products, referenced by deliverables:
 
-- Architecture Subsystems Excel document
+- Architecture subsystem data table in Excel (referenced in Architecture Visio)
