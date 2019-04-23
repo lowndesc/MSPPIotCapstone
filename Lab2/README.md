@@ -1,4 +1,4 @@
-Lab 2 deliverables included:
+Lab2 files include the following deliverables:
 
 - Architecture Diagram (with embedded Excel subsystems table)
 - Architecture Threat Model
@@ -7,6 +7,6 @@ Lab 2 deliverables included:
 - Screenshot of Power BI visualisations ('Turbine Data') with Observation stating which turbine is underperforming
 - Exported ARM template for all Azure components
 
-Lab 2 work products included:
+Lab2 work products included:
 
 - Architecture Subsystems Excel document
