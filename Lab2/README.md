@@ -7,6 +7,6 @@ Lab2 files include the following deliverables:
 - Screenshot of Power BI visualisations ('Turbine Data') with Observation stating which turbine is underperforming
 - Exported ARM template for all Azure components
 
-Lab2 work products included:
+plus the following additional work products, referenced by deliverables:
 
 - Architecture Subsystems Excel document
