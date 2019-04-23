@@ -1,6 +1,6 @@
 Lab2 files include the following deliverables:
 
-- Architecture Diagram (with embedded Excel subsystems table)
+- Architecture diagram (Visio) with embedded Excel table of subsystem data
 - Architecture Threat Model
 - Screenshot of Time Series Insights visualisations ('Interesting Telemetry')
 - Screenshot of Time Series Insights visualisations ('Suspect Telemetry')
